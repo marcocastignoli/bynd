@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <span data-bind="counter"></span>
+        <button onclick="increment()">Increment</button>
+        <hr/>
+
+        <input data-model="name" />
+        <input data-model="lastname" />
+        <button onclick="add()">Add</button><br/>
+        You are about to add: <span data-bind="name"></span> <span data-bind="lastname"></span>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template data-for="list">
+                    <tr>
+                        <td data-each-bind="$.name"></td>
+                        <td data-each-bind="$.lastname"></td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="./bynd.js"></script>
+    <script>
+
+        /**
+         * Define the initial state:
+         * Add `data-bind="counter"` to an html element, it will reload every time the counter is updated 
+         * Add `data-model="name"` to an html input, the state will update every time the input changes
+         * Add `data-for="list"` to an html template, a list will be created cloning the html first child
+         **/
+        let state = new Bynd({
+            counter: 0,
+            name: '',
+            lastname: '',
+            list: [
+                { name: 'ciao', lastname: 'ciaone' },
+                { name: 'prova', lastname: 'provetta' },
+                { name: '2', lastname: '4' },
+            ]
+        })
+
+        function increment() {
+            // Update the variable to reload the html elements linked to this variable
+            state.counter++
+        }
+        function add() {
+            // Push a new element to reload the list linked with `bind-for`
+            state.list.push({ name: state.name, lastname: state.lastname })
+            state.name = ''
+            state.lastname = ''
+        }
+    </script>
+</body>
+
+</html>
