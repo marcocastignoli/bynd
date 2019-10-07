@@ -2,6 +2,12 @@
 
 Experimenting a pure javascript alternative to React and Vue using getters/setters and data attributes.
 
+## I don't know hoe to test it
+I don't know how to test it, I would love to know the PRO and CON of this approach. Any suggestion is very welcome.
+* Is it efficient? 
+* How can I benchmark it?
+
+
 ## How it works
 
 ### Define your template
